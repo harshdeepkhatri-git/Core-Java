@@ -2,7 +2,8 @@ package com.Loops;
 
 import java.util.Scanner;
 
-public class FibonacciSeries {
+public class
+FibonacciSeries {
 
 	public static void main(String[] args) {
 		Scanner sc =new Scanner(System.in);
@@ -12,12 +13,12 @@ public class FibonacciSeries {
     int a = 0;
     int b = 1;
     
-    System.out.println(a);
-    System.out.println(b);
+    System.out.print(a + " ");
+    System.out.print(b + " ");
          
          for( int i = 1; i<n-1; i++) {
         	int sum = a+b;
-        	System.out.println(sum);
+        	System.out.print(sum + " ");
         	 a =b;
         	 b=sum; 
          }
