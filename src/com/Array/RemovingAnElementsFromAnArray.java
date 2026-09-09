@@ -2,7 +2,7 @@ package com.Array;
 
 import java.util.Scanner;
 
-public class DeletingAllDuplicateNumberInAnArray {
+public class RemovingAnElementsFromAnArray {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
