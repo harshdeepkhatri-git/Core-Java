@@ -1,4 +1,4 @@
-package com.corejava.pattern;
+package com.Loops.pattern;
 
 public class NumberLoopPattern {
 
