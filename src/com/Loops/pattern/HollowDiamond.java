@@ -42,20 +42,39 @@ public class HollowDiamond {
 		for(int j = 1; j <=n-i; j++) {
 			System.out.print(" ");
 		}
-		
 		//Stars and middle space
-	      
 		for(int j = 1; j<=2*i-1; j++) {
-			if(j==1|| j==2*i-1) {
+			if (j == 1 || j == 2 * i - 1) {
 				System.out.print("*");
-			}
-			else {
+			} else {
 				System.out.print(" ");
 			}
 		}
-		  
 		System.out.println();
 		}
-		
    }
 }
+//  output
+//                 *
+//                * *
+//               *   *
+//              *     *
+//             *       *
+//              *     *
+//               *   *
+//                * *
+//                 *
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//

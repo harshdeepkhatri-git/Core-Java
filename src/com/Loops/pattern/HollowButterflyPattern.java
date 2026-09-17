@@ -26,3 +26,14 @@ public class HollowButterflyPattern {
 	}
 
 }
+
+// output
+//              *       *
+//              **     **
+//              * *   * *
+//              *  * *  *
+//              *   *   *
+//              *  * *  *
+//              * *   * *
+//              **     **
+//              *       *

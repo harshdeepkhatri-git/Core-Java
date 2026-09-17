@@ -8,12 +8,8 @@ public class Experienced {
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Enter a character");
 		String var = sc.next();
-		
-		
-		
-		
-		
-	switch (var) {
+
+		switch (var) {
 		case "Adult":
 			System.out.println("You are going to become an Adult");
 			break;
@@ -21,31 +17,19 @@ public class Experienced {
 		case "harsh":
 		   System.out.println("You are going to join job");
 		   break;
-		   
 		case "Radhe":
 			   System.out.println("You are going to get retired");
-			   break;   
-			   
+			   break;
 		default :
 			   System.out.println("Enjoy your life dude");
 
-	 }			   
-		System.out.println("Thanks for using java");	   
+		}
+		       System.out.println("Thanks for using java");
 			 
-	}	  
+	    }
 }
-	
 
-		
-		
-		
-	
-		
-		
-		
-		
-		
-	/*	if (age>56) {
+/*	if (age>56) {
 			System.out.println("You are experienced");
 		}
 		else if(age>46) {
@@ -57,4 +41,5 @@ public class Experienced {
 		else 
 			System.out.println("You are not experienced");
 	}
-}*/
+   }
+*/
