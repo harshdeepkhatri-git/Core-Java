@@ -36,6 +36,7 @@ public class DeletingAndNewArray {
                  }
                  
                  else {
+
                 	 //new Array
                 	 
                 	int [] newArr = new int[arr.length -1];
