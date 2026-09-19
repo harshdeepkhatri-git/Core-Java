@@ -17,7 +17,7 @@ public class StringConversion {
         System.out.println("The character of an array: "+ Arrays.toString(array));
         // Output : The character of an array: [F, u, l, l, s, t, a, c, k]
 
-// 2. >> By using split() method.
+        // 2. >> By using split() method.
 
        String str1 = "Java Fullstack Development";
        String [] arr  = str1.split(" ");
@@ -29,10 +29,11 @@ public class StringConversion {
 
        System.out.println("arr1 = "+ Arrays.toString(arr1));// output: arr1 = [12, 08, 2005]
 
-// Array to Strings.
-  // >> To convert array to string there are two approaches--
-        // 1. By Using toString() method.
-        // 2. By using join() method.
+    // Array to Strings.
+
+       // >> To convert array to string there are two approaches--
+                // 1. By Using toString() method.
+                // 2. By using join() method.
 
     // 1. By Using toString() Methods.
 
@@ -57,7 +58,8 @@ public class StringConversion {
 
 
         // Conversion of primitive type to String type.
-        // There is a method for conversion called as ValueOf() method.
+            // There is a method for conversion called as
+        //             >> ValueOf() method.
 
         int x = 10;
         String s1 = String.valueOf(x);
@@ -65,8 +67,9 @@ public class StringConversion {
         System.out.println(s1.getClass().getName()); // output: java.lang.String
 
 
-// Conversion of Character array into String >> There is a method used:
-   //  >>> CopyvalueOf().
+      // Conversion of Character array into String
+          // >> There is a method used:
+                  //  >>> CopyvalueOf().
 
       char [] array1 = {'a', 'p', 'p', 'l', 'e'};
          System.out.println(array1.getClass().getName());
