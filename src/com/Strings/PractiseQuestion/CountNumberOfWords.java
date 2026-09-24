@@ -9,6 +9,7 @@ public class CountNumberOfWords {
         System.out.println("Enter the Strings: ");
         String str = sc.nextLine();
 
+
           String[] words = str.trim().split("\\s+");
 
            System.out.println(words.length);
