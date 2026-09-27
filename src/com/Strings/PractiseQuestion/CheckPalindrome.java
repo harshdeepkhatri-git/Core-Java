@@ -9,7 +9,7 @@ public class CheckPalindrome {
         String str = sc.nextLine();
 
         String reverse= "";
-        boolean palindrome = true;
+
 
         for (int i = str.length() - 1; i >= 0; i--) {
             reverse = reverse + str.charAt(i);

@@ -1,7 +1,5 @@
 package com.OOPs;
 
-import java.util.Scanner;
-
 // how to create am object for a class.
 
 //class person {
