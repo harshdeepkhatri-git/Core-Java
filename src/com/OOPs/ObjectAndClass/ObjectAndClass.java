@@ -1,4 +1,4 @@
-package com.OOPs;
+package com.OOPs.ObjectAndClass;
 
 // how to create am object for a class.
 

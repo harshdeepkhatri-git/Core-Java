@@ -1,5 +1,6 @@
 package com.Strings.PractiseQuestion;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ReverseAString {
@@ -8,12 +9,27 @@ public class ReverseAString {
         System.out.println("Enter the String: ");
         String str = sc.nextLine();
 
-        String reverse ="";
+//        String reverse ="";
+//
+//        for(int i = str.length()-1; i>=0; i--){
+//            reverse+=str.charAt(i);
+//        }
+//        System.out.println(reverse);
 
-        for(int i = str.length()-1; i>=0; i--){
-            reverse+=str.charAt(i);
+
+                String[] ch = str.split(" ");
+
+                for (int i = 0; i < ch.length; i++) {
+                    ch[i] = new StringBuilder(ch[i]).reverse().toString();
+                }
+
+                System.out.println(String.join(" ", ch)); // olleh dlrow
+            }
         }
-        System.out.println(reverse);
 
-    }
-}
+
+
+// output
+//        Enter the String:   the sky is blue
+//         output >>  eulb si yks eht
+
