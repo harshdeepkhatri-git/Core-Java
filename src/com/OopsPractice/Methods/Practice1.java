@@ -6,7 +6,7 @@ class Calculator{
 
     void add(){
         Scanner sc = new Scanner(System.in);
-        Calculator c = new Calculator();
+
         System.out.println("Enter 1st number");
         int n = sc.nextInt();
 
