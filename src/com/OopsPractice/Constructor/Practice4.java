@@ -3,6 +3,7 @@ package com.OopsPractice.Constructor;
 //Constructor with Multiple Instance Variables
 
 class Product{
+
     String name;
     int productId;
     double price;
@@ -22,6 +23,8 @@ class Product{
         return price * quantity;
     }
 }
+
+
 public class Practice4 {
     public static void main(String[] args){
 
