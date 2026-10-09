@@ -2,7 +2,7 @@ package com.datatype;
 
 import java.util.Scanner;
 
-public class ChcekNumberIsPositiveNegativeOrZero {
+public class CheckNumberIsPositiveNegativeOrZero {
 
 
 

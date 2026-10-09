@@ -1,11 +1,11 @@
 package com.OopsPractice.Constructor;
 
 
-class Bank{
+class Bankaccount{
     String accountHolder;
     double balance;
 
-    Bank(String accountHolder, double balance){
+    Bankaccount(String accountHolder, double balance){
         this.accountHolder = accountHolder;
         this.balance = balance;
     }
@@ -32,7 +32,7 @@ class Bank{
 
 public class Practice6{
     public static void main(String[] args){
-        Bank bank = new Bank("Harsh", 50000);
+        Bankaccount bank = new Bankaccount("Harsh", 50000);
         System.out.println("Account Holder: "+ bank.accountHolder);
         System.out.println("Initial Balance: "+ bank.balance);
 
