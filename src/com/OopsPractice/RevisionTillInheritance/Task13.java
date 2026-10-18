@@ -43,7 +43,7 @@ class Electronics extends Product{
         System.out.println("Quantity : "+ quantity);
         System.out.println("Original Price : "+ originalTotal);
         System.out.println("Discount : "+ discount);
-        System.out.println("Final price: "+ calculatePrice(quantity));
+        System.out.println("Final price: "+ finalTotal);
     }
 }
 
