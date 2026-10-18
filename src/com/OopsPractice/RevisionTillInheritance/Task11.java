@@ -1,4 +1,3 @@
-
 package com.OopsPractice.RevisionTillInheritance;
 
 interface PaymentQ10 {
@@ -7,15 +6,16 @@ interface PaymentQ10 {
 
 class CreditCardQ10 implements PaymentQ10 {
 
-    @Override
-    public void processPayment(double amount) {
-        if (amount <= 0) {
+      @Override
+      public void processPayment(double amount) {
+          if (amount <= 0) {
             System.out.println("Invalid payment amount.");
             return;
         }
 
         System.out.println("Processing Credit Card payment: ₹" + amount);
         System.out.println("Credit Card payment successful.");
+
     }
 }
 
@@ -26,6 +26,7 @@ class UPIQ10 implements PaymentQ10 {
         if (amount <= 0) {
             System.out.println("Invalid payment amount.");
             return;
+
         }
 
         System.out.println("Processing UPI payment: ₹" + amount);
@@ -36,16 +37,21 @@ class UPIQ10 implements PaymentQ10 {
 class PayPalQ10 implements PaymentQ10 {
 
     @Override
+
     public void processPayment(double amount) {
+
         if (amount <= 0) {
             System.out.println("Invalid payment amount.");
             return;
+
         }
 
-        System.out.println("Processing PayPal payment: ₹" + amount);
+        System.out.println("Processing PayPal payment: ₹ " + amount);
         System.out.println("PayPal payment successful.");
+
     }
 }
+
 
 class PaymentProcessorQ10 {
 
@@ -54,6 +60,8 @@ class PaymentProcessorQ10 {
         System.out.println();
     }
 }
+
+
 
 public class Task11 {
 
@@ -71,5 +79,6 @@ public class Task11 {
 
         // Test invalid payment
         processor.pay(upi, -500);
+
     }
 }
