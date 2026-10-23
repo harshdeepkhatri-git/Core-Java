@@ -7,7 +7,7 @@ public class MenuBasedATM {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		int balance = 10000;
+		int balance = 100000;
 		
 		
 	System.out.println("1. Check balance ");
