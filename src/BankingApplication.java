@@ -3,16 +3,16 @@ import java.util.Scanner;
 
 public class BankingApplication {
 
-    static Scanner sc = new Scanner(System.in);
+   private static Scanner sc = new Scanner(System.in);
 
     // customer array and counters
-    static Customer[] customers = new Customer[5];
-    static int customerCount = 0;
-    static int nextAccountNumber = 1001;
+    private static Customer[] customers = new Customer[5];
+    private static int customerCount = 0;
+    private static int nextAccountNumber = 1001;
 
 
     //Display Menu
-    static void displayMenu() {
+   private static void displayMenu() {
         System.out.println("===============================");
         System.out.println("   BANKING MANAGEMENT SYSTEM");
         System.out.println("===============================");
@@ -27,7 +27,7 @@ public class BankingApplication {
     }
 
     // Create account
-    public static void createAccount() {
+    private static void createAccount() {
 
         if (customerCount == customers.length) {
             System.out.println("Bank cannot create more accounts. ");
@@ -36,26 +36,62 @@ public class BankingApplication {
 
         //Customer details.
 
-        System.out.println("Enter customer name: ");
-        String name = sc.nextLine();
+        String name;
+        while (true) {
+            System.out.println("Enter customer name: ");
+             name = sc.nextLine().trim();
 
-
-        System.out.println("Enter phone number: ");
-        String phone = sc.nextLine();
-
-
-        System.out.println("Enter initial deposit: ");
-        double deposit = sc.nextDouble();
-        sc.nextLine();
-
-
-        // Validate initial deposit
-
-        if ((deposit < 500)) {
-            System.out.println("Minimum initial deposit should be 500 !! ");
-            return;
+             if (name.isEmpty()){
+                 System.out.println("Customer name Cannot be  empty!.");
+                 continue;
+             }
+             if (!name.matches("[a-zA-Z]+( [a-zA-Z]+)*")){
+                 System.out.println("Invalid name! Please enter alphabets only.");
+                 continue;
+             }
+             break;
         }
 
+
+        String phone;
+        while (true) {
+            System.out.println("Enter phone number: ");
+            phone = sc.nextLine().trim();
+
+            if (phone.isEmpty()){
+                System.out.println("Invalid phone number cannot be empty.");
+                continue;
+            }
+
+            if (!phone.matches("[6-9][0-9]{9}")){
+                System.out.println("Invalid phone number! Please enter a valid phone number.");
+                continue;
+            }
+            break;
+        }
+
+
+        double deposit;
+
+        while (true) {
+            try {
+            System.out.println("Enter deposite amount: ");
+            deposit = sc.nextDouble();
+            sc.nextLine();
+
+            // Minimum deposit validation
+            if (!Double.isFinite(deposit)||(deposit < 500)) {
+                System.out.println("Minimum initial deposit should be 500 !! ");
+                continue;
+            }
+            break;
+        }
+            catch(InputMismatchException e){
+            System.out.println("Invalid deposite amount! Please enter a valid deposite amount");
+            sc.nextLine();
+
+            }
+        }
 
         // Generate account number
 
@@ -81,28 +117,51 @@ public class BankingApplication {
 
     }
 
-    private static void depositMoney() {
-        System.out.println("Enter account number: ");
-        int accountNumber = sc.nextInt();
+      private static void depositMoney() {
+          int accountNumber;
 
-        boolean found = false;
+          // Account Number validation
+            while(true){
+                try {
+                    System.out.println("Enter account number: ");
+                    accountNumber = sc.nextInt();
+                    sc.nextLine();
+                    break;
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Please Enter numeric account number.");
+                    sc.nextLine();
+                }
+            }
+               boolean found = false;
 
-        for (int i = 0; i < customerCount; i++) {
-            if (customers[i].getAccountNumber() == accountNumber) {
+            for (int i = 0; i < customerCount; i++) {
+              if (customers[i].getAccountNumber() == accountNumber) {
                 found = true;
                 System.out.println("Account found");
                 System.out.println("Customer: " + customers[i].getCustomerName());
 
                 // Deposite amount input
-                System.out.println("Enter amount to be deposited: ");
-                double amount = sc.nextDouble();
 
-                // Validate amount
+                  double amount;
+                  while(true){
+                      try {
+                          System.out.println("Enter amount to be deposited: ");
+                           amount = sc.nextDouble();
+                           sc.nextLine();
 
-                if (amount <= 0) {
-                    System.out.println("Invalid deposite amount!");
-                    return;
-                }
+                          // Validate amount
+                          if (!Double.isFinite(amount) || amount <= 0) {
+                              System.out.println("Invalid deposite amount!");
+                              continue;
+                          }
+                          break;
+                      }
+                      catch (InputMismatchException e) {
+                          System.out.println("Invalid Amount! Please enter valid amount .");
+                          sc.nextLine();
+                      }
+                  }
 
                 // Get exisiting balance
                 double oldbalance = customers[i].getBalance();
@@ -132,8 +191,19 @@ public class BankingApplication {
     }
 
     private static void withdrawMoney() {
-        System.out.println("Enter account number: ");
-        int accountNumber = sc.nextInt();
+        int accountNumber;
+        while(true){
+            try {
+                System.out.println("Enter account number: ");
+                accountNumber = sc.nextInt();
+                sc.nextLine();
+                break;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please Enter numeric account number.");
+                sc.nextLine();
+            }
+        }
         boolean found = false;
 
         for (int i = 0; i < customerCount; i++) {
@@ -142,13 +212,25 @@ public class BankingApplication {
                 System.out.println("Account found");
                 System.out.println("Customer: " + customers[i].getCustomerName());
 
-                System.out.println("Enter amount to be withdrawn: ");
-                double amount = sc.nextDouble();
+                double amount;
+                while(true){
+                    try {
+                        System.out.println("Enter amount to be withdrawn: ");
+                        amount = sc.nextDouble();
+                        sc.nextLine();
 
-                // Validate withdrawal amount
-                if (amount <= 0) {
-                    System.out.println("Invalid withdrawn amount!");
-                    return;
+                        // Validate withdrawal amount
+                        if (amount <= 0) {
+                            System.out.println("Invalid withdrawn amount!");
+                            continue;
+
+                        }
+                        break;
+                    }
+                    catch (InputMismatchException e) {
+                        System.out.println("Invalid input! Please enter valid amount .");
+                        sc.nextLine();
+                    }
                 }
 
                 // Check sufficient balance
@@ -179,9 +261,19 @@ public class BankingApplication {
     }
 
     private static void checkBalance() {
-        System.out.println("Enter account number: ");
-        int accountNumber = sc.nextInt();
-
+        int accountNumber;
+        while(true){
+            try{
+                System.out.println("Enter account number: ");
+                accountNumber = sc.nextInt();
+                sc.nextLine();
+                break;
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please Enter numeric account number.");
+                sc.nextLine();
+            }
+        }
         boolean found = false;
 
         for(int i = 0; i < customerCount; i++){
@@ -200,7 +292,7 @@ public class BankingApplication {
     }
 
 
-   static void displayAccountDetails(Customer customer){
+   private static void displayAccountDetails(Customer customer){
        System.out.println("Account Number: " + customer.getAccountNumber());
        System.out.println("Customer Name: " + customer.getCustomerName());
        System.out.println("Phone Number: " + customer.getPhoneNumber());
@@ -208,7 +300,7 @@ public class BankingApplication {
    }
 
 
-    static void handleChoice(int choice) {
+    private static void handleChoice(int choice) {
         switch (choice) {
 
             default:
