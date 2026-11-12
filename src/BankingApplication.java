@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BankingApplication {
@@ -80,7 +81,7 @@ public class BankingApplication {
 
     }
 
-    static void depositMoney() {
+    private static void depositMoney() {
         System.out.println("Enter account number: ");
         int accountNumber = sc.nextInt();
 
@@ -177,6 +178,27 @@ public class BankingApplication {
         }
     }
 
+    private static void checkBalance() {
+        System.out.println("Enter account number: ");
+        int accountNumber = sc.nextInt();
+
+        boolean found = false;
+
+        for(int i = 0; i < customerCount; i++){
+            if(customers[i].getAccountNumber() == accountNumber){
+                found = true;
+
+                System.out.println("Account found");
+                System.out.println("Customer: "+ customers[i].getCustomerName());
+                System.out.println("Available Balance: "+ customers[i].getBalance());
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Account not found");
+        }
+    }
+
 
    static void displayAccountDetails(Customer customer){
        System.out.println("Account Number: " + customer.getAccountNumber());
@@ -206,7 +228,7 @@ public class BankingApplication {
                 break;
 
             case 4:
-                System.out.println("Balance Inquiry feature coming soon");
+                checkBalance();
                 break;
 
             case 5:
@@ -218,29 +240,37 @@ public class BankingApplication {
 
 
 
+
     public static void main(String[] args) {
 
+    int choice = 0;
 
-        int choice;
+    do {
 
-        do {
+        displayMenu();
 
-            displayMenu();
-            System.out.println("Enter your choice");
+        System.out.println("Enter your choice");
+
+        try {
             choice = sc.nextInt();
             sc.nextLine();
 
             handleChoice(choice);
-
-            System.out.println();
         }
-        while (choice != 5);
-        sc.close();
+        catch (InputMismatchException e) {
+            System.out.println("Invalid input! Please enter a number.");
 
+            sc.nextLine();
+        }
 
-
+        System.out.println();
     }
+    while (choice != 5);
+    sc.close();
+
+  }
 }
+
 
 
 
