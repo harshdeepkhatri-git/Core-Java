@@ -1,14 +1,16 @@
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class BankingApplication {
 
    private static Scanner sc = new Scanner(System.in);
 
     // customer array and counters
-    private static Customer[] customers = new Customer[5];
-    private static int customerCount = 0;
+    private static ArrayList<Customer> customers =new ArrayList<>();
     private static int nextAccountNumber = 1001;
+
 
 
     //Display Menu
@@ -27,12 +29,8 @@ public class BankingApplication {
     }
 
     // Create account
-    private static void createAccount() {
+     private static void createAccount() {
 
-        if (customerCount == customers.length) {
-            System.out.println("Bank cannot create more accounts. ");
-            return;
-        }
 
         //Customer details.
 
@@ -100,12 +98,10 @@ public class BankingApplication {
         // create customer object
 
         Customer customer = new Customer(accountNumber, name, phone, deposit);
+        customers.add(customer);
 
-        //store object in an array
-        customers[customerCount] = customer;
 
         //update counters
-        customerCount++;
         nextAccountNumber++;
 
 
@@ -121,74 +117,66 @@ public class BankingApplication {
           int accountNumber;
 
           // Account Number validation
-            while(true){
-                try {
-                    System.out.println("Enter account number: ");
-                    accountNumber = sc.nextInt();
-                    sc.nextLine();
-                    break;
-                }
-                catch (InputMismatchException e) {
-                    System.out.println("Invalid input! Please Enter numeric account number.");
-                    sc.nextLine();
-                }
-            }
-               boolean found = false;
+          while (true) {
+              try {
+                  System.out.println("Enter account number: ");
+                  accountNumber = sc.nextInt();
+                  sc.nextLine();
+                  break;
+              } catch (InputMismatchException e) {
+                  System.out.println("Invalid input! Please Enter numeric account number.");
+                  sc.nextLine();
+              }
+          }
 
-            for (int i = 0; i < customerCount; i++) {
-              if (customers[i].getAccountNumber() == accountNumber) {
-                found = true;
-                System.out.println("Account found");
-                System.out.println("Customer: " + customers[i].getCustomerName());
+          Customer customer = findCustomerByAccountNumber(accountNumber);
+          if (customer == null) {
+              System.out.println("Account not found!");
+              return;
+          }
 
-                // Deposite amount input
+          System.out.println("Account found");
+          System.out.println("Customer: " + customer.getCustomerName());
 
-                  double amount;
-                  while(true){
-                      try {
-                          System.out.println("Enter amount to be deposited: ");
-                           amount = sc.nextDouble();
-                           sc.nextLine();
+          // Deposite amount input
 
-                          // Validate amount
-                          if (!Double.isFinite(amount) || amount <= 0) {
-                              System.out.println("Invalid deposite amount!");
-                              continue;
-                          }
-                          break;
-                      }
-                      catch (InputMismatchException e) {
-                          System.out.println("Invalid Amount! Please enter valid amount .");
-                          sc.nextLine();
-                      }
+          double amount;
+          while (true) {
+              try {
+                  System.out.println("Enter amount to be deposited: ");
+                  amount = sc.nextDouble();
+                  sc.nextLine();
+
+                  // Validate amount
+                  if (!Double.isFinite(amount) || amount <= 0) {
+                      System.out.println("Invalid deposite amount!");
+                      continue;
                   }
+                  break;
+              } catch (InputMismatchException e) {
+                  System.out.println("Invalid Amount! Please enter valid amount .");
+                  sc.nextLine();
+              }
+          }
 
-                // Get exisiting balance
-                double oldbalance = customers[i].getBalance();
+          // Get exisiting balance
+          double oldbalance = customer.getBalance();
 
-                // Calculate new Balance
-                double newBalance = oldbalance + amount;
+          // Calculate new Balance
+          double newBalance = oldbalance + amount;
 
-                // update balance
-                customers[i].setBalance(newBalance);
+          // update balance
+          customer.setBalance(newBalance);
 
-                //Display updated balance
-                System.out.println("\nMoney deposited Successfully!");
-                System.out.println("Previous Balance: " + oldbalance);
-                System.out.println("Deposited Amount: " + amount);
-                System.out.println("Updated Balance: " + customers[i].getBalance());
+          //Display updated balance
+          System.out.println("\nMoney deposited Successfully!");
+          System.out.println("Previous Balance: " + oldbalance);
+          System.out.println("Deposited Amount: " + amount);
+          System.out.println("Updated Balance: " + customer.getBalance());
 
-                break;
+      }
 
-            }
-        }
-        // Account not Found
 
-        if (!found) {
-            System.out.println("Account not found");
-        }
-
-    }
 
     private static void withdrawMoney() {
         int accountNumber;
@@ -204,13 +192,15 @@ public class BankingApplication {
                 sc.nextLine();
             }
         }
-        boolean found = false;
 
-        for (int i = 0; i < customerCount; i++) {
-            if (customers[i].getAccountNumber() == accountNumber) {
-                found = true;
+
+                Customer customer = findCustomerByAccountNumber(accountNumber);
+                    if (customer == null) {
+                        System.out.println("Account not found!");
+                        return;
+                    }
                 System.out.println("Account found");
-                System.out.println("Customer: " + customers[i].getCustomerName());
+                System.out.println("Customer: " + customer.getCustomerName());
 
                 double amount;
                 while(true){
@@ -220,10 +210,9 @@ public class BankingApplication {
                         sc.nextLine();
 
                         // Validate withdrawal amount
-                        if (amount <= 0) {
+                        if (!Double.isFinite(amount)||amount <= 0) {
                             System.out.println("Invalid withdrawn amount!");
                             continue;
-
                         }
                         break;
                     }
@@ -234,7 +223,7 @@ public class BankingApplication {
                 }
 
                 // Check sufficient balance
-                double oldbalance = customers[i].getBalance();
+                double oldbalance = customer.getBalance();
 
                 // check sufficient balance
                 if (amount > oldbalance) {
@@ -246,19 +235,16 @@ public class BankingApplication {
                 double newBalance = oldbalance - amount;
 
                 // Update balance
-                customers[i].setBalance(newBalance);
+                customer.setBalance(newBalance);
 
                 System.out.println("\nMoney withdrawn Successfully!");
                 System.out.println("Previous Balance: " + oldbalance);
                 System.out.println("Withdraw Amount: " + amount);
-                System.out.println("Updated Balance: " + customers[i].getBalance());
-                break;
+                System.out.println("Updated Balance: " + customer.getBalance());
             }
-        }
-        if (!found) {
-            System.out.println("Account not found");
-        }
-    }
+
+
+
 
     private static void checkBalance() {
         int accountNumber;
@@ -274,22 +260,17 @@ public class BankingApplication {
                 sc.nextLine();
             }
         }
-        boolean found = false;
 
-        for(int i = 0; i < customerCount; i++){
-            if(customers[i].getAccountNumber() == accountNumber){
-                found = true;
+            Customer customer = findCustomerByAccountNumber(accountNumber);
+                if (customer == null) {
+                    System.out.println("Account not found");
+                    return;
+                }
+             System.out.println("Account found");
+             System.out.println("Customer: " + customer.getCustomerName());
+             System.out.println("Available Balance: "+ customer.getBalance());
 
-                System.out.println("Account found");
-                System.out.println("Customer: "+ customers[i].getCustomerName());
-                System.out.println("Available Balance: "+ customers[i].getBalance());
-                break;
             }
-        }
-        if (!found) {
-            System.out.println("Account not found");
-        }
-    }
 
 
    private static void displayAccountDetails(Customer customer){
@@ -308,15 +289,15 @@ public class BankingApplication {
                 break;
 
             case 1:
-               createAccount();
+                createAccount();
                 break;
 
-                case 2:
-                     depositMoney();
+            case 2:
+                depositMoney();
                 break;
 
             case 3:
-               withdrawMoney();
+                withdrawMoney();
                 break;
 
             case 4:
@@ -330,8 +311,16 @@ public class BankingApplication {
         }
     }
 
-
-
+    private static Customer findCustomerByAccountNumber(int accountNumber) {
+        Iterator<Customer> iterator = customers.iterator();
+        while (iterator.hasNext()) {
+            Customer customer = iterator.next();
+            if (customer.getAccountNumber() == accountNumber) {
+                return customer;
+            }
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
 
